@@ -18,7 +18,7 @@ jobs:
         run: pip install -U requests
       - name: Install new instances
         env:
-          api_token = ${{ secrets.SLATE_API_TOKEN }}
+          api_token: ${{ secrets.SLATE_API_TOKEN }}
         run: |
           git clone https://github.com/Mansalu/ExampleActions.git
           cd ExampleActions
