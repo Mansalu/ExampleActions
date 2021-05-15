@@ -14,11 +14,13 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: '3.8'
+        env:
+          api_token = ${{ secrets.SLATE_API_TOKEN }}
       - name: Install new instances
         run: |
           git clone https://github.com/Mansalu/ExampleActions.git
           cd ExampleActions
           git show --pretty="format:" --name-only > .changed
-          python3 PushUpdates.py ".changed"
+          python3 PushUpdates.py ".changed" "$api_token"
           
  
