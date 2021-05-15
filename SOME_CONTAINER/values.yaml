@@ -1,6 +1,6 @@
 # The label to apply to this deployment, 
 # used to manage multiple instances of the same application
-Instance: default
+Instance: standard
 
 # The HTML data that nginx should serve
 Data: |-
