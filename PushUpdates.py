@@ -26,7 +26,7 @@ for FileName in ChangedFiles:
     print(url)
     response = requests.post(url, 
                             params={'token' : slateToken}, 
-                            data={'apiVersion' : 'v1alpha3',
+                            json={'apiVersion' : 'v1alpha3',
                                   'group': groupName,
                                   'cluster': clusterName,
                                   'configuration': valuesString})
