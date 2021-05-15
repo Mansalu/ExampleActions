@@ -2,7 +2,7 @@
 # used to manage multiple instances of the same application
 Instance: standard
 
-# update3
+# update4
 
 # The HTML data that nginx should serve
 Data: |-
