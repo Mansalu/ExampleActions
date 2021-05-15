@@ -1,0 +1,15 @@
+name: SLATE Deployment
+
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  deploy:
+    runs-on: centos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install new instances
+    
+ 
