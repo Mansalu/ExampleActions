@@ -15,7 +15,9 @@ except Exception as e:
 
 for FileName in ChangedFiles:
     containerName = FileName.split('/')[0]
-    if (containerName == '' or containerName[0] == '.' or FileName.split('/')[1] == 'instance'):
+    if (containerName == '' or containerName[0] == '.' or containerName.find('.') > -1):
+        continue
+    if (FileName.split('/')[1] == 'instance'):
         continue
     instanceDetails = open(containerName + '/' + 'instance.yaml').readlines()
     clusterName = instanceDetails[0].split(':')[1].strip()
