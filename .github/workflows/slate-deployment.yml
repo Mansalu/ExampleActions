@@ -15,7 +15,7 @@ jobs:
           git clone https://github.com/Mansalu/ExampleActions.git
           cd ExampleActions
           git show --pretty="format:" --name-only > .changed
-          ChangedFiles = $(cat .changed)
+          export ChangedFiles = $(cat .changed)
           for File in $ChangedFiles
           do
             echo $File
