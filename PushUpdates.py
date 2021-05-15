@@ -31,3 +31,7 @@ for FileName in ChangedFiles:
                                   'cluster': clusterName,
                                   'configuration': valuesString})
     print(response, response.text)
+    if (response.status_code == 200):
+        instanceID = response.json()['metadata']['id']
+        open(containerName + '/' + instance, 'x').write(instanceID)
+        
