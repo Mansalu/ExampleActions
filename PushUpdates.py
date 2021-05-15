@@ -30,4 +30,4 @@ for FileName in ChangedFiles:
                                   'group': groupName,
                                   'cluster': clusterName,
                                   'configuration': valuesString})
-    print(response)
+    print(response, response.text)
