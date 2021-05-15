@@ -18,9 +18,9 @@ for FileName in ChangedFiles:
     if (containerName == '' or containerName[0] == '.'):
         continue
     instanceDetails = open(containerName + '/' + 'instance.yaml').readlines()
-    clusterName = instanceDetails[0].split(':')[1]
-    groupName = instanceDetails[1].split(':')[1]
-    appName = instanceDetails[2].split(':')[1]
+    clusterName = instanceDetails[0].split(':')[1].strip()
+    groupName = instanceDetails[1].split(':')[1].strip()
+    appName = instanceDetails[2].split(':')[1].strip()
     valuesString = open(containerName + '/' + 'values.yaml').read()
     url = 'https://api.slateci.io:443/v1alpha3/apps/' + appName
     print(url)
