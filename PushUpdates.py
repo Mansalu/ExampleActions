@@ -19,7 +19,7 @@ for FileName in ChangedFiles:
     clusterName = instanceDetails[0].split(':')[1]
     groupName = instanceDetails[1].split(':')[1]
     appName = instanceDetails[2].split(':')[1]
-    valuesString = open(containerName + '/', 'values.yaml').read()
+    valuesString = open(containerName + '/' + 'values.yaml').read()
     response = requests.post('https://api.slateci.io:443/v1alpha3/apps/' + appName, 
                             params={'token' : slateToken}, 
                             body={'apiVersion' : 'v1alpha3',
