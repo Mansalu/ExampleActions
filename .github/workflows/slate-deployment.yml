@@ -24,5 +24,8 @@ jobs:
           cd ExampleActions
           git show --pretty="format:" --name-only > .changed
           python3 PushUpdates.py ".changed" "$api_token"
+          git add .
+          git commit -m "add slate instance ID"
+          git push
           
  
