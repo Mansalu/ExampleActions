@@ -16,8 +16,10 @@ except Exception as e:
     print("Failed to open temp file", PathToChangedFiles, e)
 
 for Entry in ChangedFiles:
-    FileName = Entry.split()[1]
     FileStatus = Entry.split()[0]
+    if (FileStatus == ''):
+        continue
+    FileName = Entry.split()[1]
     containerName = FileName.split('/values.yaml')[0]
     if (containerName.__contains__('.')):
         continue
