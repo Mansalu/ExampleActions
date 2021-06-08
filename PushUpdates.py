@@ -16,7 +16,8 @@ except Exception as e:
     print("Failed to open temp file", PathToChangedFiles, e)
 
 for Entry in ChangedFiles:
-    print(Entry)
+    if (Entry == ''):
+        continue
     FileStatus = Entry.split()[0]
     if (FileStatus == ''):
         continue
