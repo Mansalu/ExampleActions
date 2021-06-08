@@ -17,7 +17,7 @@ except Exception as e:
 
 for Entry in ChangedFiles:
     FileName = Entry.split()[1]
-    FileStatus = Entry.split([0])
+    FileStatus = Entry.split()[0]
     containerName = FileName.split('/values.yaml')[0]
     print(FileName, FileStatus, containerName)
     instanceDetails = open(containerName + '/' + 'instance.yaml').readlines()
