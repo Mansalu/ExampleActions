@@ -22,7 +22,7 @@ jobs:
         run: |
           git clone https://github.com/Mansalu/ExampleActions.git
           cd ExampleActions
-          git show --pretty="format:" --name-only > .changed
+          git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
           python3 PushUpdates.py ".changed" "$api_token"
           
  
