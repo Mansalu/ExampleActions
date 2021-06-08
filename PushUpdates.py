@@ -19,6 +19,8 @@ for Entry in ChangedFiles:
     FileName = Entry.split()[1]
     FileStatus = Entry.split()[0]
     containerName = FileName.split('/values.yaml')[0]
+    if (containerName.__contains__('.')):
+        continue
     print(FileName, FileStatus, containerName)
     instanceDetails = open(containerName + '/' + 'instance.yaml').readlines()
     clusterName = instanceDetails[0].split(':')[1]
