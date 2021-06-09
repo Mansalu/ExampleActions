@@ -50,7 +50,7 @@ for Entry in ChangedFiles:
 
         instanceConfig = {}
         for line in instanceDetails:
-            instanceConfig.update({line.split(': ')[0] : line.split(': ')[1]})
+            instanceConfig.update({line.split(': ')[0].strip() : line.split(': ')[1].strip()})
 
         clusterName = instanceConfig["cluster"]
         groupName = instanceConfig["group"]
