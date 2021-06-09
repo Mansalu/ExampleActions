@@ -63,6 +63,7 @@ for Entry in ChangedFiles:
         valuesString = open(containerName + '/' + 'values.yaml', 'r').read()
         url = 'https://api.slateci.io:443/v1alpha3/apps/' + appName
         print(url)
+        print(clusterName, groupName, appName)
         response = requests.post(url, 
                                 params={'token' : slateToken}, 
                                 json={'apiVersion' : 'v1alpha3',
