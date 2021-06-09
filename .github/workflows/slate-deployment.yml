@@ -16,9 +16,8 @@ jobs:
       - name: Install Python Requests lib
         run: pip install -U requests
       - uses: actions/checkout@v2
-        with:
-          path: '.'
       - run: |
+          cd ExampleActions
           git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
           python3 PushUpdates.py ".changed" ${{ secrets.SLATE_API_TOKEN }}
           rm .changed
