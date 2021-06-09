@@ -53,7 +53,7 @@ for Entry in ChangedFiles:
 
         clusterName = instanceConfig["cluster"]
         groupName = instanceConfig["group"]
-        appName = instanceConfig["appName"]
+        appName = instanceConfig["app"]
         if (instanceConfig.get("appVersion")):
             appVersion = instanceConfig["appVersion"]
         else:
