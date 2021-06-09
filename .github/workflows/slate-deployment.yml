@@ -15,7 +15,8 @@ jobs:
           python-version: '3.8'
       - name: Install Python Requests lib
         run: pip install -U requests
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - run: |
           cd $GITHUB_WORKSPACE
           git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
