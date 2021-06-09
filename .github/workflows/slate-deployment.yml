@@ -16,7 +16,6 @@ jobs:
       - name: Install Python Requests lib
         run: pip install -U requests
       - uses: actions/checkout@v2
-      - name: Install new instances
       - run: |
           git clone https://github.com/Mansalu/ExampleActions.git
           cd ExampleActions
