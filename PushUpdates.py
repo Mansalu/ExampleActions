@@ -19,7 +19,7 @@ except Exception as e:
     print("Failed to open temp file", PathToChangedFiles, e)
 
 for Entry in ChangedFiles:
-    print(Entry)
+    print(Entry, '\n')
     # Parse entry containing file name and change status
     if (Entry == ''):
         continue
