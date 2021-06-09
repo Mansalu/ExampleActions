@@ -22,6 +22,7 @@ for Entry in ChangedFiles:
     print(Entry, '\n')
     # Parse entry containing file name and change status
     if (Entry == ''):
+        print("Skipping file", Entry, '\n')
         continue
     # Status: M = Modified, A = Added, R = Removed
     FileStatus = Entry.split()[0]
@@ -31,15 +32,17 @@ for Entry in ChangedFiles:
     containerName = FileName.split('/values.yaml')[0]
     # Skip irrelevant files
     if (containerName.__contains__('.')):
+        print("Skipping file", Entry, '\n')
         continue
     if (not FileName.__contains__('values.yaml')):
         if (FileName.__contains__('instance.yaml')):
             print("Not implemented: Version update")
         else:
+            print("Skipping file", Entry, '\n')
             continue
 
+    # Update an instance
     if (FileStatus == 'M'):
-        # Update an instance
         try:
             instanceDetails = open(containerName + '/' + 'instance.yaml', 'r').readlines()
         except Exception as e:
@@ -54,15 +57,16 @@ for Entry in ChangedFiles:
             appVersion = instanceConfig["appVersion"]
         instanceID = instanceConfig["instance"]
         valuesString = open(containerName + '/' + 'values.yaml', 'r').read()
-        url = 'https://api.slateci.io:443/v1alpha3/instances/' + instanceID + '/update'
-        print(url)
-        response = requests.put(url, 
+        uri = 'https://api.slateci.io:443/v1alpha3/instances/' + instanceID + '/update'
+        print(uri)
+        response = requests.put(uri, 
                                 params={'token' : slateToken}, 
                                 json={'apiVersion' : 'v1alpha3',
                                     'configuration': valuesString})
         print(response, response.text)
+
+    # Create a new instance
     elif (FileStatus == 'A'):
-        # Create a new instance
         try:
             instanceDetails = open(containerName + '/' + 'instance.yaml', 'r').readlines()
         except Exception as e:
@@ -70,6 +74,7 @@ for Entry in ChangedFiles:
 
         instanceConfig = {}
         for line in instanceDetails:
+            # Parse key value pairs from the instance file into a dict
             instanceConfig.update({line.split(': ')[0].strip() : line.split(': ')[1].strip()})
 
         clusterName = instanceConfig["cluster"]
@@ -80,9 +85,9 @@ for Entry in ChangedFiles:
             appVersion = instanceConfig["appVersion"]
 
         valuesString = open(containerName + '/' + 'values.yaml', 'r').read()
-        url = 'https://api.slateci.io:443/v1alpha3/apps/' + appName
-        print(url)
-        response = requests.post(url, 
+        uri = 'https://api.slateci.io:443/v1alpha3/apps/' + appName
+        print(uri)
+        response = requests.post(uri, 
                                 params={'token' : slateToken}, 
                                 json={'apiVersion' : 'v1alpha3',
                                     'group': groupName,
@@ -99,8 +104,8 @@ for Entry in ChangedFiles:
                 print("::set-output name=push::true")
             except Exception as e:
                 print("Failed to open instance file for ID writeback:", containerName + '/' + 'instance.yaml' , e)
+    # Remove an instance
     elif (FileStatus == 'D'):
-        # Remove an instance
         print('D')
     else:
         print('Error: Invalid file status passed by actions')
