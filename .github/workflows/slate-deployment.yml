@@ -17,6 +17,7 @@ jobs:
       - name: Install Python Requests lib
         run: pip install -U requests
       - name: Install new instances
+        uses: actions/checkout@v2
         env:
           api_token: ${{ secrets.SLATE_API_TOKEN }}
         run: |
