@@ -20,10 +20,14 @@ jobs:
         with:
           fetch-depth: 0
       - name: Deploy to SLATE
+        id: deploy
         run: |
           git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
           python3 PushUpdates.py ".changed" ${{ secrets.SLATE_API_TOKEN }}
           rm .changed
+      - name: Commit SLATE Instance ID
+          if: ${{ steps.deploy.outputs.push == "true" }}
+          run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
