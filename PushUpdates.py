@@ -76,7 +76,7 @@ for Entry in ChangedFiles:
             # Open instance.yaml for writing and writeback instance ID
             try:
                 instanceFile = open(containerName + '/' + 'instance.yaml', 'a')
-                instanceFile.write('instance: ' + instanceID)
+                instanceFile.write('\ninstance: ' + instanceID)
                 # Git add commit push
             except Exception as e:
                 print("Failed to open instance file for ID writeback:", containerName + '/' + 'instance.yaml' , e)
