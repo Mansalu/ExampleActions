@@ -25,6 +25,7 @@ jobs:
           cd ExampleActions
           git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
           python3 PushUpdates.py ".changed" "$api_token"
+          rm .changed
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
