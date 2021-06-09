@@ -48,7 +48,7 @@ for Entry in ChangedFiles:
             print("Failed to open instance file for reading:", containerName + '/' + 'instance.yaml' , e)
 
         instanceConfig = {}
-        for line in instanceDetails.split('\n'):
+        for line in instanceDetails:
             instanceConfig.update({line.split(': ')[0] : line.split(': ')[1]})
 
         clusterName = instanceConfig["cluster"]
