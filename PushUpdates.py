@@ -60,13 +60,15 @@ for Entry in ChangedFiles:
             appVersion = ""
 
         valuesString = open(containerName + '/' + 'values.yaml', 'r').read()
-        response = requests.post('https://api.slateci.io:443/v1alpha3/apps/' + appName, 
+        url = 'https://api.slateci.io:443/v1alpha3/apps/' + appName
+        print(url)
+        response = requests.post(url, 
                                 params={'token' : slateToken}, 
-                                body={'apiVersion' : 'v1alpha3',
+                                json={'apiVersion' : 'v1alpha3',
                                     'group': groupName,
                                     'cluster': clusterName,
                                     'configuration': valuesString})
-        print(response)
+        print(response, response.text)
         if (response.status_code == 200):
             instanceID = response.json()['metadata']['id']
             # Open instance.yaml for writing and writeback instance ID
