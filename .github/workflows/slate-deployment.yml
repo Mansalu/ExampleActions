@@ -22,7 +22,7 @@ jobs:
       - name: Deploy to SLATE
         id: deploy
         run: |
-          git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
+          git diff --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
           python3 PushUpdates.py ".changed" ${{ secrets.SLATE_API_TOKEN }}
           rm .changed
       - name: Commit SLATE Instance ID
