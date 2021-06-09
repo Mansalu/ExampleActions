@@ -53,6 +53,7 @@ for Entry in ChangedFiles:
         if (instanceConfig.get("appVersion")):
             appVersion = instanceConfig["appVersion"]
         instanceID = instanceConfig["instance"]
+        valuesString = open(containerName + '/' + 'values.yaml', 'r').read()
         url = 'https://api.slateci.io:443/v1alpha3/instances/' + instanceID
         print(url)
         response = requests.post(url, 
