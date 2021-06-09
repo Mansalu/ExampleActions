@@ -54,7 +54,7 @@ for Entry in ChangedFiles:
             appVersion = instanceConfig["appVersion"]
         instanceID = instanceConfig["instance"]
         valuesString = open(containerName + '/' + 'values.yaml', 'r').read()
-        url = 'https://api.slateci.io:443/v1alpha3/instances/' + instanceID
+        url = 'https://api.slateci.io:443/v1alpha3/instances/' + instanceID + '/update'
         print(url)
         response = requests.post(url, 
                                 params={'token' : slateToken}, 
