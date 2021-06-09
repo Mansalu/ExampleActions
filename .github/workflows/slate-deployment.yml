@@ -17,6 +17,8 @@ jobs:
         run: pip install -U requests
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Deploy to SLATE
         run: |
           git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
