@@ -9,22 +9,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
           python-version: '3.8'
       - name: Install Python Requests lib
         run: pip install -U requests
+      - uses: actions/checkout@v2
       - name: Install new instances
-        uses: actions/checkout@v2
-        env:
-          api_token: ${{ secrets.SLATE_API_TOKEN }}
-        run: |
+      - run: |
           git clone https://github.com/Mansalu/ExampleActions.git
           cd ExampleActions
           git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
-          python3 PushUpdates.py ".changed" "$api_token"
+          python3 PushUpdates.py ".changed" ${{ secrets.SLATE_API_TOKEN }}
           rm .changed
           git config user.name github-actions
           git config user.email github-actions@github.com
