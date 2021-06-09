@@ -18,7 +18,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - run: |
-          cd $GITHUB_WORKSPACE
           git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
           python3 PushUpdates.py ".changed" ${{ secrets.SLATE_API_TOKEN }}
           rm .changed
