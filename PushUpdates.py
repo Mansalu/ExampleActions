@@ -40,7 +40,26 @@ for Entry in ChangedFiles:
 
     if (FileStatus == 'M'):
         # Update an instance
-        print('M')
+        try:
+            instanceDetails = open(containerName + '/' + 'instance.yaml', 'r').readlines()
+        except Exception as e:
+            print("Failed to open instance file for reading:", containerName + '/' + 'instance.yaml' , e)
+        instanceConfig = {}
+        for line in instanceDetails:
+            instanceConfig.update({line.split(': ')[0].strip() : line.split(': ')[1].strip()})
+        if (not instanceConfig.get("instance")):
+            print("Failed to find instance ID for:", containerName + '/' + 'values.yaml')
+        appVersion = ""
+        if (instanceConfig.get("appVersion")):
+            appVersion = instanceConfig["appVersion"]
+        instanceID = instanceConfig["instance"]
+        url = 'https://api.slateci.io:443/v1alpha3/instances/' + instanceID
+        print(url)
+        response = requests.post(url, 
+                                params={'token' : slateToken}, 
+                                json={'apiVersion' : 'v1alpha3',
+                                    'configuration': valuesString})
+        print(response, response.text)
     elif (FileStatus == 'A'):
         # Create a new instance
         try:
@@ -55,15 +74,13 @@ for Entry in ChangedFiles:
         clusterName = instanceConfig["cluster"]
         groupName = instanceConfig["group"]
         appName = instanceConfig["app"]
+        appVersion = ""
         if (instanceConfig.get("appVersion")):
             appVersion = instanceConfig["appVersion"]
-        else:
-            appVersion = ""
 
         valuesString = open(containerName + '/' + 'values.yaml', 'r').read()
         url = 'https://api.slateci.io:443/v1alpha3/apps/' + appName
         print(url)
-        print(clusterName, groupName, appName)
         response = requests.post(url, 
                                 params={'token' : slateToken}, 
                                 json={'apiVersion' : 'v1alpha3',
