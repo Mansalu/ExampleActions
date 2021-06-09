@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
       - name: Deploy to SLATE
         run: |
-          git show --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
+          git diff --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
           python3 PushUpdates.py ".changed" ${{ secrets.SLATE_API_TOKEN }}
           rm .changed
           git config user.name github-actions
