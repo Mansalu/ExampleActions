@@ -59,7 +59,7 @@ for Entry in ChangedFiles:
         else:
             appVersion = ""
 
-        valuesString = open(containerName + '/', 'values.yaml').read()
+        valuesString = open(containerName + '/' + 'values.yaml', 'r').read()
         response = requests.post('https://api.slateci.io:443/v1alpha3/apps/' + appName, 
                                 params={'token' : slateToken}, 
                                 body={'apiVersion' : 'v1alpha3',
