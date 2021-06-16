@@ -10,7 +10,23 @@ The workflow looks for files that match `values.yaml` and `instance.yaml`. When 
 
 ## Setup
 
-Place the Values file `values.yaml` into a directory that represents the instance. The directory can have any name, and can be nested. The values file must be called exactly `values.yaml`.
+Place the Values file `values.yaml` into a directory that represents the instance for each instance you want to manage. The directory can have any name, and can be nested. The values file must be called exactly `values.yaml`.
+
+Example:
+
+        MY_INSTANCE/values.yaml
+        MY_INSTANCE/instance.yaml
+        
+Copy `PushUpdates.py` and `.github/workflows/slate-deployment.yml` into your repository.
+
+### SLATE Token
+
+You will need to add your SLATE user token (obtained from portal.slateci.io/cli) as a repository secret on your GitHub repository. To do this:
+
+1. Navigate to `Settings` on the top bar of the GitHub repository interface
+2. Choose `Secrets` from the left-hand side bar menu
+3. Click the button that says `New repository secret` upper right
+4. Name the secret `SLATE_API_TOKEN`
 
 ### instance.yaml
 
