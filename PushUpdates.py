@@ -75,7 +75,7 @@ for Entry in ChangedFiles:
         instanceConfig = {}
         for line in instanceDetails:
             # Parse key value pairs from the instance file into a dict
-            instanceConfig.update({line.split(': ')[0].strip() : line.split(': ')[1].strip()})
+            instanceConfig.update({line.split(':')[0].strip() : line.split(':')[1].strip()})
 
         clusterName = instanceConfig["cluster"]
         groupName = instanceConfig["group"]
@@ -106,6 +106,6 @@ for Entry in ChangedFiles:
                 print("Failed to open instance file for ID writeback:", containerName + '/' + 'instance.yaml' , e)
     # Remove an instance
     elif (FileStatus == 'D'):
-        print('D')
+        print('Deletion is not implemented. Your instance is still running in SLATE despite file deletion.')
     else:
         print('Error: Invalid file status passed by actions')
