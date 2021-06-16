@@ -14,7 +14,7 @@ Place the Values file `values.yaml` into a directory that represents the instanc
 
 ### instance.yaml
 
-You must also have a file called `instance.yaml` that contains some details about the instance. For existing instances only the `instance` field is needed.
+You must also have a file called `instance.yaml` that contains some details about the instance. For existing instances only the `instance` field is needed. Files at the repository root will be ignored.
 
 Optionally you can specify and update the version of the SLATE application with the `version` field in `instance.yaml`. If `version` is unspecified the latest version is the default.
 
