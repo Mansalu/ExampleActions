@@ -24,7 +24,7 @@ for Entry in ChangedFiles:
     if (Entry == ''):
         print("Skipping file", Entry, '\n')
         continue
-    # Status: M = Modified, A = Added, R = Removed
+    # Status: M = Modified, A = Added, D = Removed
     FileStatus = Entry.split()[0]
     FileName = Entry.split()[1]
     # The "container" is any arbitrary path before the slate details
