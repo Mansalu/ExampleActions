@@ -1,4 +1,4 @@
-# GitOps automation for a SLATE instances
+# GitOps automation for SLATE instances
 
 This repository provides a reference implementation of GitOps style automation for SLATE instances. This automation consists of:
 
