@@ -10,14 +10,13 @@ The workflow looks for files that match `values.yaml` and `instance.yaml`. When 
 
 ## Setup
 
-Place the Values file `values.yaml` into a directory that represents the instance for each instance you want to manage. The directory can have any name, and can be nested. The values file must be called exactly `values.yaml`.
+Place the Values file `values.yaml` into a directory that represents the instance for each instance you want to manage. The directory can have any name, and can be nested. The values file must be called exactly `values.yaml`. Files at the repository root will be ignored. You will also need an `instance.yaml` for each instance.
 
 Example:
 
         MY_INSTANCE/values.yaml
         MY_INSTANCE/instance.yaml
         
-Copy `PushUpdates.py` and `.github/workflows/slate-deployment.yml` into your repository.
 
 ### SLATE Token
 
@@ -30,17 +29,21 @@ You will need to add your SLATE user token (obtained from portal.slateci.io/cli)
 
 ### instance.yaml
 
-You must also have a file called `instance.yaml` that contains some details about the instance. For existing instances only the `instance` field is needed. Files at the repository root will be ignored.
+For each instance, you must also have a file called `instance.yaml` that contains some details about the instance. For existing instances, only the `instance` field is needed to provide the ID. Info about the cluster, group, and app can be used to automatically deploy new instances too.
 
 Optionally you can specify and update the version of the SLATE application with the `version` field in `instance.yaml`. If `version` is unspecified the latest version is the default.
 
-Example 
+Complete Example 
 
         cluster: uutah-prod
         group: slate-dev
         app: nginx
         instance: instance_BrX9HtpP1L0
         version: 1.2.0
+        
+### Copy the workflow
+
+Once everything is setup, copy `PushUpdates.py` and `.github/workflows/slate-deployment.yml` into your repository.
 
 ## Git force pushes
 
