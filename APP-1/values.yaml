@@ -6,8 +6,8 @@ Instance: actions-01
 Data: |-
   <html>
   <body>
-  <h1>Hello World! </h1>
-  <h2>Deployed by actions. </h2>
+  <h1>Updated! </h1>
+  <h2>updated by actions. </h2>
   </body>
   </html>
 # Ingress control settings  
