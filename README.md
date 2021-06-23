@@ -33,17 +33,28 @@ For each instance, you must also have a file called `instance.yaml` that contain
 
 Optionally you can specify and update the version of the SLATE application with the `version` field in `instance.yaml`. If `version` is unspecified the latest version is the default.
 
-Complete Example 
+**New Instances**
+
+To deploy new instances you must include the cluster, group, and app. Version is optional.
 
         cluster: uutah-prod
         group: slate-dev
         app: nginx
-        instance: instance_BrX9HtpP1L0
         version: 1.2.0
+        
+ **Existing instances**
+ 
+ To manage existing instances you only need to specify a SLATE instanceID.
+ 
+        instance: instance_BrX9HtpP1L0
         
 ### Copy the workflow
 
 Once everything is setup, copy `PushUpdates.py` and `.github/workflows/slate-deployment.yml` into your repository.
+
+### Enable Actions in the GitHub UI
+
+Once the workflow is added to the repository, you must allow it to run by navigating to the Actions tab in GitHub's interface.
 
 ## Git force pushes
 
