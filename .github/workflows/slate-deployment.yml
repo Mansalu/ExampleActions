@@ -4,27 +4,34 @@ on:
   push:
     branches:
       - main
-      
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.8'
-      - name: Install Python Requests lib
-        run: pip install -U requests
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: Pull down automation script
+        run: curl -fsSL https://raw.githubusercontent.com/slateci/gitops-automation-script/main/PushUpdates.py -o PushUpdates.py
+
+      - name: Install Python dependencies
+        run: pip install -U requests
+
       - name: Deploy to SLATE
         id: deploy
         run: |
+          if [ ${{ github.event.before }} -eq "0000000000000000000000000000000000000000" ] || [ ${{ github.event.after }} -eq "0000000000000000000000000000000000000000" ] ; then
+            echo 'New repo nothing to do..."
+            exit 0
+          fi
           git diff --name-status --pretty="format:" ${{ github.event.before }} ${{ github.event.after }} > .changed
           python3 PushUpdates.py ".changed" ${{ secrets.SLATE_API_TOKEN }}
           rm .changed
+
       - name: Commit SLATE Instance ID
         if: ${{ steps.deploy.outputs.push == 'true' }}
         run: |
@@ -33,5 +40,3 @@ jobs:
           git add .
           git commit -m "append new SLATE instance ID" --allow-empty
           git push
-          
- 
